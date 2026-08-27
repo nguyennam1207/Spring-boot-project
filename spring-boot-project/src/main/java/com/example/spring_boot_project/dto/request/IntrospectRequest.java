@@ -21,5 +21,4 @@ public class IntrospectRequest {
         this.token = token;
     }
 
-
 }

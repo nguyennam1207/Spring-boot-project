@@ -1,13 +1,5 @@
 package com.example.spring_boot_project.configuration;
 
-<<<<<<< HEAD
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-
-=======
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -28,21 +20,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.spring_boot_project.enums.Role;
 
->>>>>>> 6aed02d (final update)
-@Configuration
-@EnableWebSecurity
+import org.springframework.context.annotation.Bean;
 
+@Configuration
 public class SecurityConfig {
 
-<<<<<<< HEAD
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-        
-
-=======
     private static final String[] PUBLIC_URLS = {
-        "/auth/**",};
+        "api/v1/auth/**",
+        "api/v1/users/**"};
 
     @Value("${jwt.signer-key}")
     protected String SECRET_KEY;
@@ -50,8 +35,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
-                .requestMatchers(HttpMethod.POST, PUBLIC_URLS).permitAll()
-                .requestMatchers(HttpMethod.GET, "/users").hasRole(Role.ADMIN.name())
+                .requestMatchers(PUBLIC_URLS).permitAll()
                 .anyRequest().authenticated()
         );
 
@@ -62,14 +46,9 @@ public class SecurityConfig {
         );
 
         http.csrf(CsrfConfigurer -> CsrfConfigurer.disable());
->>>>>>> 6aed02d (final update)
-
         return http.build();
     }
 
-<<<<<<< HEAD
-}
-=======
     @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter() {
 
@@ -96,6 +75,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
-
->>>>>>> 6aed02d (final update)
 }

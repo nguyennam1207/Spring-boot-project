@@ -1,10 +1,7 @@
 package com.example.spring_boot_project.dto.response;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-=======
 import java.util.Set;
->>>>>>> 6aed02d (final update)
 
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -18,10 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class UsersResponse {
-<<<<<<< HEAD
-=======
-
->>>>>>> 6aed02d (final update)
     private String userName;
 
     @Size(min = 8, message = "INVALID_PASSWORD")
@@ -32,9 +25,6 @@ public class UsersResponse {
     private String lastName;
 
     private LocalDate dob;
-<<<<<<< HEAD
-=======
 
     private Set<String> role;
->>>>>>> 6aed02d (final update)
 }

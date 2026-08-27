@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
 import org.springframework.security.core.context.SecurityContextHolder;
->>>>>>> 6aed02d (final update)
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,44 +24,25 @@ import com.example.spring_boot_project.mapper.UserMapper;
 import com.example.spring_boot_project.service.UsersService;
 
 import jakarta.validation.Valid;
-<<<<<<< HEAD
-
-@RestController
-@RequestMapping("/users")
-=======
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 @Slf4j
->>>>>>> 6aed02d (final update)
 public class UserController {
 
     @Autowired
     private UsersService us;
 
     @PostMapping
-    ApiResponse<Users> createUsers(@RequestBody @Valid UsersRequest request) {
-        ApiResponse<Users> apiresponse = new ApiResponse<Users>();
-        apiresponse.setResult(us.createNewUser(request));
-        return apiresponse;
+    ApiResponse<UsersResponse> createUsers(@RequestBody @Valid UsersRequest request) {
+        return ApiResponse.<UsersResponse>builder()
+                .code(200)
+                .result(us.createNewUser(request))
+                .build();
     }
 
     @GetMapping()
-<<<<<<< HEAD
-    List<UsersResponse> getAllUser() {
-        return us.getallUser();
-    }
-
-    @PutMapping("/{id}")
-    UsersResponse updateUser(@PathVariable int id, @RequestBody UpdateUserRequest request) {
-        return us.updateUsers(id, request);
-    }
-
-    @GetMapping("/{id}")
-    UsersResponse findByID(@PathVariable int id) {
-        return us.findByID(id);
-=======
     ApiResponse<List<UsersResponse>> getAllUser() {
 
         var authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -101,7 +79,6 @@ public class UserController {
         apiResponse.setResult(us.findByID(id));
 
         return apiResponse;
->>>>>>> 6aed02d (final update)
     }
 
     @DeleteMapping("/{id}")

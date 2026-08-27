@@ -34,13 +34,10 @@ public class ApplicationConfigured {
         return args -> {
             if (userRepository.findByUserName("admin").isEmpty()) {
 
-                var roles = new HashSet<String>();
-                roles.add(Role.ADMIN.name());
-
                 Users user = Users.builder()
                         .userName("admin")
                         .passWord(passwordEncoder.encode("admin"))
-                        .role(roles)
+                        .role(Role.ADMIN.name())
                         .build();
 
                 userRepository.save(user);
