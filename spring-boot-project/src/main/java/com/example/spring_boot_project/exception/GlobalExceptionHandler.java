@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.example.spring_boot_project.dto.request.ApiResponse;
 
+<<<<<<< HEAD
+=======
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+>>>>>>> 6aed02d (final update)
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -37,7 +43,12 @@ public class GlobalExceptionHandler {
         apiResponse.setCode(ErrorCode.UNCATHEGORIZED_EXCEPTION.getCode());
         apiResponse.setMessagge(ErrorCode.UNCATHEGORIZED_EXCEPTION.getMessage());
 
+<<<<<<< HEAD
         return ResponseEntity.badRequest().body(apiResponse);
+=======
+        return ResponseEntity.status(ErrorCode.UNCATHEGORIZED_EXCEPTION.getHttpStatus())
+                .body(apiResponse);
+>>>>>>> 6aed02d (final update)
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -55,7 +66,13 @@ public class GlobalExceptionHandler {
         apiResponse.setCode(errorCode.getCode());
         apiResponse.setMessagge(errorCode.getMessage());
 
+<<<<<<< HEAD
         return ResponseEntity.badRequest().body(apiResponse);
+=======
+        return ResponseEntity
+                .status(errorCode.getHttpStatus())
+                .body(apiResponse);
+>>>>>>> 6aed02d (final update)
 
     }
 

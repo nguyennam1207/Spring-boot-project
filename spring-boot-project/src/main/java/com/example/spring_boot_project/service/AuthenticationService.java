@@ -4,12 +4,20 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+<<<<<<< HEAD
+=======
+import java.util.StringJoiner;
+>>>>>>> 6aed02d (final update)
 
 import org.apache.logging.log4j.CloseableThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
+=======
+import org.springframework.util.CollectionUtils;
+>>>>>>> 6aed02d (final update)
 
 import com.example.spring_boot_project.dto.request.AuthenticationRequest;
 import com.example.spring_boot_project.dto.request.IntrospectRequest;
@@ -46,7 +54,12 @@ public class AuthenticationService {
     private UsersRepository userRepository;
 
     @NonFinal
+<<<<<<< HEAD
     protected static final String SECRET_KEY = "8642eb70e1b158bb30b63efa72def9ae372866ff3f41f52de67b2e3953f7a418";
+=======
+    @org.springframework.beans.factory.annotation.Value("${jwt.signer-key}")
+    protected String SECRET_KEY;
+>>>>>>> 6aed02d (final update)
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
@@ -58,7 +71,11 @@ public class AuthenticationService {
             throw new AppException(ErrorCode.UNAUTHORIZED);
         }
 
+<<<<<<< HEAD
         var token = GenerateToken(request.getUserName());
+=======
+        var token = GenerateToken(user);
+>>>>>>> 6aed02d (final update)
 
         return AuthenticationResponse.builder()
                 .token(token)
@@ -66,18 +83,30 @@ public class AuthenticationService {
                 .build();
     }
 
+<<<<<<< HEAD
     private String GenerateToken(String userName) {
+=======
+    private String GenerateToken(Users user) {
+>>>>>>> 6aed02d (final update)
 
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS512);
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
+<<<<<<< HEAD
                 .subject(userName)
+=======
+                .subject(user.getUserName())
+>>>>>>> 6aed02d (final update)
                 .issuer("commercialweb.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
                 ))
+<<<<<<< HEAD
                 .claim("customClaim", "customValue")
+=======
+                .claim("scope", buildScope(user))
+>>>>>>> 6aed02d (final update)
                 .build();
 
         Payload payload = new Payload(claimsSet.toJSONObject());
@@ -88,7 +117,11 @@ public class AuthenticationService {
             jwsObject.sign(new MACSigner(SECRET_KEY.getBytes()));
             return jwsObject.serialize();
         } catch (JOSEException e) {
+<<<<<<< HEAD
             log.error("Cannot generate token for username: {}", userName, e);
+=======
+            log.error("Cannot generate token for username: {}", user.getUserName(), e);
+>>>>>>> 6aed02d (final update)
             throw new RuntimeException(e);
         }
     }
@@ -109,4 +142,15 @@ public class AuthenticationService {
                 .valid(verified && expiryTime.after(new Date()))
                 .build();
     }
+<<<<<<< HEAD
+=======
+
+    public String buildScope(Users user) {
+        StringJoiner stringjoiner = new StringJoiner(" ");
+        if (!CollectionUtils.isEmpty(user.getRole())) {
+            user.getRole().forEach(s -> stringjoiner.add(s));
+        }
+        return stringjoiner.toString();
+    }
+>>>>>>> 6aed02d (final update)
 }
