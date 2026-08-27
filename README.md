@@ -85,3 +85,39 @@ Chạy ứng dụng Spring Boot bằng lệnh:
   ```
 
 🎉 **Thành công!** Ứng dụng sẽ hoạt động tại địa chỉ: `http://localhost:8080`
+
+## 🧪 API Testing with Postman
+
+Dưới đây là hình ảnh kiểm thử thực tế các API quản lý người dùng (User Management) qua Postman:
+
+---
+
+### 1. GET USER (Lấy danh sách người dùng)
+* **Endpoint:** `GET http://localhost:8080/api/v1/users`
+* **Mô tả:** Trả về danh sách tất cả các người dùng trong hệ thống với mã trạng thái `200 OK`.
+
+![GET USER](Get_all_user.jpg)
+
+---
+
+### 2. CREATE USER (Tạo người dùng mới)
+* **Endpoint:** `POST http://localhost:8080/api/v1/users`
+* **Mô tả:** Khởi tạo thông tin người dùng mới. Mật khẩu được mã hóa tự động bằng BCrypt trước khi lưu vào CSDL.
+
+![CREATE USER](Create_user.jpg)
+
+---
+
+### 3. UPDATE USER (Cập nhật thông tin người dùng)
+* **Endpoint:** `PUT http://localhost:8080/api/v1/users/{userId}`
+* **Mô tả:** Cập nhật thông tin người dùng theo ID tương ứng.
+
+![UPDATE USER](Update_user.jpg)
+
+---
+
+### 4. DELETE USER (Xóa người dùng)
+* **Endpoint:** `DELETE http://localhost:8080/api/v1/users/{userId}`
+* **Mô tả:** Xóa người dùng khỏi hệ thống theo ID.
+
+![DELETE USER](Delete_user.jpg)
